@@ -367,6 +367,24 @@ Expected: options[:offset] = {:x => NUMERIC, :y => NUMERIC}
         query_action_with_options(:touch_hold, uiquery, options)
       end
 
+      # Performs "pull to refresh" on the main view exclude NavigationBar and Status bar.
+      #
+      # By default gesture start from the top point of the screen using strong swipe
+      #
+      # It is possible to add additional view that can be on top of the dcreen, so it's height is calculated and ignored.
+      #
+      # @example
+      # pull_to_refresh({:view_height => "searchBar"})
+      def pull_to_refresh(options={})
+        merged_options = {
+            :query => "*",
+            :force => :strong,
+            :direction => :down
+        }.merge(options)
+
+        launcher.automator.pull_to_refresh(merged_options)
+      end
+
       # Performs a "swipe" gesture.
       #
       # @example

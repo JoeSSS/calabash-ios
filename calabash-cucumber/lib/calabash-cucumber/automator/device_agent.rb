@@ -411,6 +411,27 @@ Make sure your query returns at least one view.
           number = return_key_type_of_first_responder
           mark_for_return_key_type(number)
         end
+
+        # @!visibility private
+        def pull_to_refresh(options)
+          dupped_options = options.dup
+
+          optional_view_height = Coordinates.additional_element_height(dupped_options[:view_height])
+
+          hash = query_for_coordinates(dupped_options)
+          center_point = hash[:coordinates]
+          top_point = Coordinates.top_point_for_full_screen_pan
+
+          merged_x_point = top_point[:x] - center_point[:x]
+          merged_y_point = top_point[:y] - center_point[:y] +  + optional_view_height
+
+          dupped_options[:offset] = {
+              :x => merged_x_point,
+              :y => merged_y_point
+          }
+
+          swipe(dupped_options)
+        end
       end
     end
   end

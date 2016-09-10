@@ -291,6 +291,17 @@ module Calabash
           { :x => to_x, :y => to_y }
         end
 
+        # @!visibility private
+        def self.additional_element_height(view_class)
+          coordinates = Coordinates.instance_without_element
+          @additional_element_height =  coordinates.additional_y(view_class)
+        end
+
+        # @!visibility private
+        def additional_y(view_class)
+          @additional_y ||= height_for_view(view_class)
+        end
+
         private
 
         # @!visibility private
