@@ -423,7 +423,7 @@ Make sure your query returns at least one view.
           top_point = Coordinates.top_point_for_full_screen_pan
 
           merged_x_point = top_point[:x] - center_point[:x]
-          merged_y_point = top_point[:y] - center_point[:y] +  + optional_view_height
+          merged_y_point = top_point[:y] - center_point[:y] + optional_view_height
 
           dupped_options[:offset] = {
               :x => merged_x_point,
